@@ -45,6 +45,8 @@
   <ul>
     <li><a href="<?=Url::toRoute(['teacher/ye'])?>" target="right"><span class="icon-caret-right"></span>添加直播</a></li>
     <li><a href="<?=Url::toRoute(['teacher/show'])?>" target="right"><span class="icon-caret-right"></span>直播列表</a></li>
+    <li><a href="<?=Url::toRoute(['teacher/teacher_add_html'])?>" target="right"><span class="icon-caret-right"></span>添加教师</a></li>
+    <li><a href="<?=Url::toRoute(['teacher/teacher_list'])?>" target="right"><span class="icon-caret-right"></span>教师列表</a></li>
   </ul>
   <h2><span class="icon-pencil-square-o"></span>栏目管理</h2>
   <ul>
