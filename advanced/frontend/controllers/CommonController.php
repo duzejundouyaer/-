@@ -9,7 +9,7 @@ class CommonController extends \yii\web\Controller
 	#禁用Yii框架的样式
 	public $layout = false;
 
-	//管理员修改密码
+	
     public function init()
     {
        $session=\Yii::$app->session;  //开启session
