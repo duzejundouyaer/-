@@ -22,7 +22,7 @@
 <div class="panel admin-panel margin-top">
  
   <div class="body-content">
-    <form method="post" class="form-x" action="?r=teacher/add" enctype="multipart/form-data">   
+    <form method="post" id="form" class="form-x" action="?r=teacher/add" enctype="multipart/form-data">   
       <input type="hidden" name="id"  value="" />  
       <div class="form-group">
         <div class="label">
@@ -49,10 +49,14 @@
         </div>
         <div class="field">
           <!-- 时间插件 -->
-       <input type="text" class="sang_Calender" style="height:30px;" name="begintime" data-validate="required:请选择开始时间"/>-
-       <input type="text" class="sang_Calender" style="height:30px;" name="endtime" data-validate="required:请选择结束时间"/> 
+       <input type="text" class="sang_Calender" id="begintime" style="height:30px;" name="begintime"/>-
+       <input type="text" class="sang_Calender" id="endtime" style="height:30px;" name="endtime"/> 
           <!-- end时间插件 -->
+           <span id="info" style="color:#FF2D2D;"></span>
+           <div class="tips"></div>
+
         </div>
+
       </div>
       <div class="form-group">
         <div class="label">
@@ -70,7 +74,7 @@
           <label></label>
         </div>
         <div class="field">
-          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+          <button class="button bg-main icon-check-square-o" type="submit" id="submit"> 提交</button>
         </div>
       </div>
     </form>
@@ -81,3 +85,41 @@
 <!-- shijian -->
 <script type="text/javascript" src="time/datetime.js"></script>
 <!-- end shijian -->
+
+<script>
+$(function(){
+     var error = 0 ;
+     $("#begintime").blur(function(){
+          var begintime = $(this).val();
+           if(begintime == '')
+           {
+                error++;
+                $("#info").html("请输入开始时间");
+           }else
+           {
+                error=0;
+           }
+     })
+      $("#endtime").blur(function(){
+          var begintime = $(this).val();
+           if(begintime == '')
+           {
+                error++;
+                $("#info").html("请输入结束时间");
+           }else
+           {
+                error=0;
+           }
+     })
+      $("#form").submit(function(){
+            var begintime = $("#begintime").val();
+            var endtime = $("#endtime").val();
+          if(begintime == '' || endtime == '')
+          {
+            $("#info").html("请输入直播的开始与结束时间");
+             return false;
+          }
+      })
+})
+
+</script>
