@@ -15,6 +15,7 @@ use yii\filters\AccessControl;
 use yii\web\UploadedFile;
 use yii\data\Pagination;
 use app\models\teacher;
+use app\models\StudyTeacher;
 
 /**
  * 名师点播
@@ -143,6 +144,83 @@ public $layout = false;
 
 	}
 
+	/**
+	 * 教师添加页面
+	 */
+	public function actionTeacher_add_html()
+	{
+         return  $this->render('teacher_add');
+	}
+    /**
+     * 添加教师信息
+     */
+    public function actionTeacher_add_info()
+    {
+          $request=Yii::$app->request;
+    	if($request->isPost)
+    	{
+    		$file = UploadedFile::getInstanceByName('photo');//获取图片信息
+    		$post=$request->post(); // 接受数据
+    		$names = $post['name'];
+    		$desc = $post['desc'];
+    		$years = $post['years'];
+    		$dir = 'upload/';                //上传目录
+    		$name = $dir.$file->name; //上传文件后的绝对路径
+    		$status = $file->saveAs($name,true);
+    		if($status)
+    		{
+               
+                $filename = $file->name;
+                //$reg = $StudyAdv->addAdv($title,$url,$filename,$desc,$sort);
+                 $db = \Yii::$app->db->createCommand();
+                 $reg = $db->insert('study_teacher' , ['teacher_name'=>$names,'teacher_years'=>$years,'teacher_img'=>$filename,'teacher_desc'=>$desc])->execute();//执行添加操作
+        			// $StudyAdv->adv_title=$title;
+				    // $StudyAdv->adv_url=$url;
+				    // $StudyAdv->adv_img=$filename;
+				    // $StudyAdv->adv_desc=$desc;
+				    // $StudyAdv->adv_sort=$sort;
+				    // $reg = $StudyAdv->save();
+				    // print_r($reg);
+                if($reg)
+                {
+                	echo "<script>alert('添加成功');location.href='?r=teacher/teacher_list'</script>";
+                }else
+                {
+                	die('失败');
+                }
+    		}else
+    		{
+    			echo "<script>alert('服务器错误');localtion.href='?r=teacher/teacher_add_html'</script>";
+    		}
+    	}else
+    	{
+    		return $this->render('teacher_add_html');
+    	}
+    }
+
+    /**
+     * 教师展示页面
+     */
+     public function actionTeacher_list()
+     {
+         $StudyTeacher = new StudyTeacher();
+         $info = $StudyTeacher->find()->asArray()->all();
+     	return $this->render('teacher_list',['info'=>$info]);
+     }
+     /**
+      * 删除教师
+      */
+     public function actionDelete_teacher()
+     {
+     	$teacher_id = $_GET['id'];
+     	$StudyTeacher = new StudyTeacher();
+     	$result=$StudyTeacher->find()->where(['teacher_id'=>$teacher_id])->one();
+		$reg = $result->delete();
+		if($reg)
+		{
+			return 1;
+		}
+     }
 }
 
 
