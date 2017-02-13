@@ -41,6 +41,11 @@
         <li><a href="<?=Url::toRoute(['column/addcur'])?>" target="right"><span class="icon-caret-right"></span>添加课程</a></li>
         <li><a href="<?=Url::toRoute(['cate/cate'])?>" target="right"><span class="icon-caret-right"></span>课程列表</a></li>
     </ul>
+    <h2><span class="icon-pencil-square-o"></span>名师管理</h2>
+  <ul>
+    <li><a href="<?=Url::toRoute(['teacher/ye'])?>" target="right"><span class="icon-caret-right"></span>添加直播</a></li>
+    <li><a href="<?=Url::toRoute(['teacher/show'])?>" target="right"><span class="icon-caret-right"></span>直播列表</a></li>
+  </ul>
   <h2><span class="icon-pencil-square-o"></span>栏目管理</h2>
   <ul>
     <li><a href="<?=Url::toRoute(['content/contentlist'])?>" target="right"><span class="icon-caret-right"></span>内容管理</a></li>
