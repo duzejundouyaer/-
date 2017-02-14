@@ -36,19 +36,13 @@
       <td><?=$value['adv_sort']?></td>
       <td><div class="button-group" id="<?=$value['adv_id']?>">
       <a class="button border-main" href="#update" id="updateAdv"><span class="icon-edit"></span> 修改</a>
-      <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1)"><span class="icon-trash-o"></span> 删除</a>
+      <a class="button border-red" href="javascript:void(0)" id="dels"><span class="icon-trash-o"></span> 删除</a>
       </div></td>
     </tr>
    <?php endforeach ?>
   </table>
 </div>
-<script type="text/javascript">
-function del(id,mid){
-  if(confirm("您确定要删除吗?")){
-  
-  }
-}
-</script>
+
 <div class="panel admin-panel margin-top" id="add">
   <div class="panel-head"><strong><span class="icon-pencil-square-o"></span> 增加内容</strong></div>
   <div class="body-content">
@@ -195,5 +189,23 @@ function del(id,mid){
              }
           });
       })
+     $(document).on("click","#dels",function(){
+       if(confirm("您确定要删除吗?")){
+           var _this = $(this);
+           var id = _this.parent().attr('id');
+           $.ajax({
+           type: "GET",
+           url: "?r=adv/delete_adv",
+           data: {id:id},
+           success: function(msg){
+               if(msg==1)
+               {
+                 _this.parent().parent().parent().remove();
+               }
+           }
+        })
+    }
+  })
+
   })
 </script>
