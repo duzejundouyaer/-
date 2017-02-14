@@ -119,4 +119,19 @@ class AdvController extends CommonController
         }
     }
 
+    /**
+     * 删除单条轮播图
+     */
+    public function actionDelete_adv()
+    {
+        $adv_id = $_GET['id'];
+        $StudyTeacher = new StudyTeacher();
+        $result=$StudyTeacher->find()->where(['adv_id'=>$adv_id])->one();
+        $reg = $result->delete();
+        if($reg)
+        {
+            return 1;
+        }
+    }
+
 }
