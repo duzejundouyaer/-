@@ -263,7 +263,7 @@ h1 {
 <div class="sky-container">
   <div class="text-right sky-container__left">
     <h2 class="portfolio">
-      付出的努力和
+      付出的努力永远
     </h2>
     <h2 class="resurrection">
       收获成
@@ -271,7 +271,7 @@ h1 {
   </div>
   <div class="text-left sky-container__right">
     <h2 class="08">
-      永远
+      和
     </h2>
     <h2 class="thirty-one">
       正比
