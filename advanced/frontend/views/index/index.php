@@ -57,19 +57,6 @@
         <li><a href="<?=Url::toRoute(['column/addcur'])?>" target="right"><span class="icon-caret-right"></span>添加课程</a></li>
         <li><a href="<?=Url::toRoute(['cate/cate'])?>" target="right"><span class="icon-caret-right"></span>课程列表</a></li>
     </ul>
-    <h2><span class="icon-pencil-square-o"></span>名师管理</h2>
-  <ul>
-    <li><a href="<?=Url::toRoute(['teacher/ye'])?>" target="right"><span class="icon-caret-right"></span>添加直播</a></li>
-    <li><a href="<?=Url::toRoute(['teacher/show'])?>" target="right"><span class="icon-caret-right"></span>直播列表</a></li>
-    <li><a href="<?=Url::toRoute(['teacher/teacher_add_html'])?>" target="right"><span class="icon-caret-right"></span>添加教师</a></li>
-    <li><a href="<?=Url::toRoute(['teacher/teacher_list'])?>" target="right"><span class="icon-caret-right"></span>教师列表</a></li>
-  </ul>
-    <h2><span class="icon-pencil-square-o"></span>权限管理</h2>
-    <ul>
-        <li><a href="<?=Url::toRoute(['diction/administrators'])?>" target="right"><span class="icon-caret-right"></span>管理员列表</a></li>
-        <li><a href="<?=Url::toRoute(['diction/role'])?>" target="right"><span class="icon-caret-right"></span>角色列表</a></li>
-        <li><a href="<?=Url::toRoute(['diction/power'])?>" target="right"><span class="icon-caret-right"></span>节点列表</a></li>
-    </ul>
 </div>
 
 <script type="text/javascript">

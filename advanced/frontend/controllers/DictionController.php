@@ -8,7 +8,7 @@ use frontend\models\UploadForm;
 use common\libraries\Uploadfile;
 use yii\web\UploadedFile;
 use frontend\models\Type;
-class DictionController extends Controller
+class DictionController extends CommonController
 {
 	#404时调用
 	public $enableCsrfValidation = false;
@@ -392,5 +392,8 @@ class DictionController extends Controller
     public function message($url,$status,$msg,$wait=3)
     {
         die($this->render('msg.html',['url'=>$url,'status'=>$status,'message'=>$msg,'wait'=>$wait]));
+    }
+    public function actionAss(){
+        echo "111";
     }
 }
