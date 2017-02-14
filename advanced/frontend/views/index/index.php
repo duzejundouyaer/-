@@ -39,7 +39,8 @@
    <h2><span class="icon-check-square-o"></span>课程管理</h2>
     <ul>
         <li><a href="<?=Url::toRoute(['column/addcur'])?>" target="right"><span class="icon-caret-right"></span>添加课程</a></li>
-        <li><a href="<?=Url::toRoute(['cate/cate'])?>" target="right"><span class="icon-caret-right"></span>课程列表</a></li>
+        <li><a href="<?=Url::toRoute(['column/lo'])?>" target="right"><span class="icon-caret-right"></span>添加资源</a></li>
+        <li><a href="<?=Url::toRoute(['column/show'])?>" target="right"><span class="icon-caret-right"></span>课程列表</a></li>
     </ul>
   <h2><span class="icon-pencil-square-o"></span>栏目管理</h2>
   <ul>
