@@ -8,7 +8,7 @@ use frontend\models\UploadForm;
 use common\libraries\Uploadfile;
 use yii\web\UploadedFile;
 use frontend\models\Type;
-class CateController extends Controller
+class CateController extends CommonController
 {
 	#404时调用
 	public $enableCsrfValidation = false;

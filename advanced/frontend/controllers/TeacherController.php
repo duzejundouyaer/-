@@ -21,7 +21,7 @@ use app\models\StudyTeacher;
  * 名师点播
  * Teacher controller
  */
-class TeacherController extends Controller
+class TeacherController extends CommonController
 {
 
 public $enableCsrfValidation = false; //禁止表单提交验证
