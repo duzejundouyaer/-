@@ -15,7 +15,7 @@
 <div class="panel admin-panel margin-top">
     <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>添加分类</strong></div>
     <div class="body-content">
-        <form method="post" class="form-x" action="?r=cate/cateedit">
+        <form method="post" class="form-x" action="?r=cate/cateedit" enctype="multipart/form-data">
             <input type="hidden" name="tid" value="<?php echo $one['type_id']?>">
             <div class="form-group">
                 <div class="label">
@@ -32,6 +32,7 @@
                 </div>
                 <div class="field">
                     <select name="parent_id" class="input w50">
+                        <option value="0">顶级节点</option>
                         <?php foreach($type as $key=>$val){?>
                             <?php if($val['type_id']==$one['parent_id']){?>
                                 <option value="<?php echo $val['type_id']?>" selected="selected"><?php echo str_repeat('&nbsp;&nbsp;&nbsp;',$val['flag'])?>
@@ -42,10 +43,23 @@
                             <?php }?>
                         <?php }?>
                     </select>
-                    <div class="tips">不选择上级分类默认为一级分类</div>
+                    <div class="tips">默认为一级分类</div>
                 </div>
             </div>
-
+            <div class="form-group">
+                <div class="label">
+                    <label>分类图标：</label>
+                </div>
+                <div class="field">
+                    <div>
+                        <input type="file" name="type_img[]"/>
+                        <div class="tips"></div>
+                    </div>
+                    <div>
+                        <img src="<?php echo $one['type_img']?>" width="50" alt=""/>
+                    </div>
+                </div>
+            </div>
             <div class="form-group">
                 <div class="label">
                     <label>是否显示：</label>

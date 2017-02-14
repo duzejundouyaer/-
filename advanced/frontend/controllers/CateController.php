@@ -8,18 +8,19 @@ use frontend\models\UploadForm;
 use common\libraries\Uploadfile;
 use yii\web\UploadedFile;
 use frontend\models\Type;
-class CateController extends CommonController
+class CateController extends Controller
 {
-    #404时调用
-    public $enableCsrfValidation = false;
-    #禁用Yii框架的样式
-    public $layout = false;
+	#404时调用
+	public $enableCsrfValidation = false;
+	#禁用Yii框架的样式
+	public $layout = false;
     //分类列表
     public function actionCate()
     {
         $type=new Type();
         $info=$type::find()->asArray()->all();
         $data=$this->recursion($info);
+        //print_r($data);die;
         return $this->render('cate',['data'=>$data]);
     }
     //添加分类
@@ -30,37 +31,29 @@ class CateController extends CommonController
         if($request->isPost) {
             //print_r($_FILES['type_img']);die;
             $data = Yii::$app->request->post();
-            $upload=new UploadedFile(); //实例化上传类
-            //print_r($upload);die;
-            $upload->getInstanceByName('type_img'); //获取文件原名称
-            $img=$_FILES['type_img']; //获取上传文件参数
-            //print_r($img);die;
-            $upload->tempName=$img['tmp_name']; //设置上传的文件的临时名称
-            //创建目录
-            $dir='typez/upload/';
-            $rand = md5(time() . mt_rand(0,10000));
-            $name= $dir.$rand.'.'.'jpg';
-            //print_r($name);die;
-            $arr=$upload->saveAs($name,true); //保存文件
-            if($arr){
+            $uploads=new Uploadfile();
+            $type = array('image/gif', 'image/jpeg', 'image/png', 'image/pjpeg', 'image/x-png');
+            $uploads->Uploadfile($_FILES['type_img'], './upload/type',1221024000,$type);
+            $num = $uploads->upload();
+            if($num!=0) {
+                $b_cover = $uploads->getSaveInfo();
+                $admin_img = $b_cover[0]['newpath'];
                 $article = new Type();
                 $article->type_name = $data['type_name'];
                 $article->parent_id = $data['parent_id'];
                 $article->type_is_show = $data['type_is_show'];
                 $article->type_sort = $data['sort'];
-                $article->type_img = $name;
+                $article->type_img = $admin_img;
                 $res=$article->save();
                 if ($res) {
                     //Yii::$app->getSession()->setFlash('errors', '保存成功');
                     return $this->redirect("?r=cate/cate");
                 } else {
-                    //Yii::$app->getSession()->setFlash('error', '保存失败');
-                    return $this->redirect("?r=cate/addcate");
+                    $this->message('?r=cate/addcate', 0, "保存失败", $wait = 3);
                 }
             }else{
-                echo "文件上传错误";
+                $this->message('?r=cate/addcate',0,"文件上传错误",$wait=3);
             }
-
         }else{
             $type=new Type();
             $info=$type::find()->asArray()->all();
@@ -106,18 +99,44 @@ class CateController extends CommonController
         if($request->isPost) {
             $data = $request->post();
             //print_r($data);
-            $article = Type::findOne($data['tid']);
-            $article->type_name = $data['type_name'];
-            $article->parent_id = $data['parent_id'];
-            $article->type_is_show = $data['type_is_show'];
-            $article->type_sort = $data['sort'];
-            $res=$article->save();
-            if($res){
-                //Yii::$app->getSession()->setFlash('errors', '保存成功');
-                return $this->redirect("?r=cate/cate");
-            } else {
-                //Yii::$app->getSession()->setFlash('error', '保存失败');
-                return $this->redirect("?r=cate/cate");
+            $img=$_FILES['type_img'];
+            if($img['name'][0]==""){
+                $article = Type::findOne($data['tid']);
+                $article->type_name = $data['type_name'];
+                $article->parent_id = $data['parent_id'];
+                $article->type_is_show = $data['type_is_show'];
+                $article->type_sort = $data['sort'];
+                $res=$article->save();
+                if($res){
+                    //Yii::$app->getSession()->setFlash('errors', '保存成功');
+                    return $this->redirect("?r=cate/cate");
+                } else {
+                    $this->message('?r=cate/cate',0,"保存失败",$wait=3);
+                }
+            }else{
+                $uploads=new Uploadfile();
+                $type = array('image/gif', 'image/jpeg', 'image/png', 'image/pjpeg', 'image/x-png');
+                $uploads->Uploadfile($_FILES['type_img'], './upload/type',1221024000,$type);
+                $num = $uploads->upload();
+                if($num!=0) {
+                    $b_cover = $uploads->getSaveInfo();
+                    $admin_img = $b_cover[0]['newpath'];
+                    $article = Type::findOne($data['tid']);
+                    $article->type_name = $data['type_name'];
+                    $article->parent_id = $data['parent_id'];
+                    $article->type_is_show = $data['type_is_show'];
+                    $article->type_sort = $data['sort'];
+                    $article->type_img = $admin_img;
+                    $res=$article->save();
+                    if($res){
+                        //Yii::$app->getSession()->setFlash('errors', '保存成功');
+                        return $this->redirect("?r=cate/cate");
+                    } else {
+                        $this->message('?r=cate/cate',0,"保存失败",$wait=3);
+                    }
+                }else{
+                    $this->message('?r=cate/cate',0,"图标保存失败",$wait=3);
+                }
             }
         }else{
             $tid = $request->get('tid');
@@ -163,23 +182,23 @@ class CateController extends CommonController
 //        return $this->render('upload', ['model' => $model]);
 //    }
 // //图片上传
-    public function actionUploadone()
-    {
-        $uploaddir     = 'upload/';
-        $filename      = date("Ymdhis").rand(100,999);
-        $uploadfile    = $uploaddir . $filename.substr($_FILES['Filedata']["name"],strrpos($_FILES['Filedata']["name"],"."));
-        $temploadfile  = $_FILES['Filedata']['tmp_name'];
-        move_uploaded_file($temploadfile , $uploadfile);
-
-        //返回数据  在页面上js做处理
-        $filedata = array(
-            'result' => 'true',
-            'name' => $_FILES['Filedata']["name"],
-            'filepath' => $uploadfile,
-        );
-        echo json_encode($filedata);
-        exit;
-    }
+//    public function actionUploadone()
+//    {
+//        $uploaddir     = 'upload/';
+//        $filename      = date("Ymdhis").rand(100,999);
+//        $uploadfile    = $uploaddir . $filename.substr($_FILES['Filedata']["name"],strrpos($_FILES['Filedata']["name"],"."));
+//        $temploadfile  = $_FILES['Filedata']['tmp_name'];
+//        move_uploaded_file($temploadfile , $uploadfile);
+//
+//        //返回数据  在页面上js做处理
+//        $filedata = array(
+//            'result' => 'true',
+//            'name' => $_FILES['Filedata']["name"],
+//            'filepath' => $uploadfile,
+//        );
+//        echo json_encode($filedata);
+//        exit;
+//    }
     public function recursion($data,$path=0,$flag=1){
         static $arr=array();
         foreach($data as $key=>$val){
@@ -191,5 +210,9 @@ class CateController extends CommonController
         }
         return $arr;
     }
-
+    //消息
+    public function message($url,$status,$msg,$wait=3)
+    {
+        die($this->render('msg.html',['url'=>$url,'status'=>$status,'message'=>$msg,'wait'=>$wait]));
+    }
 }

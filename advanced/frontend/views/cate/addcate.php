@@ -32,6 +32,7 @@ use yii\widgets\ActiveForm;
             </div>
             <div class="field">
                 <select name="parent_id" class="input w50">
+                    <option value="0">顶级节点</option>
                     <?php foreach($type as $key=>$val){?>
                         <option value="<?php echo $val['type_id']?>"><?php echo str_repeat('&nbsp;&nbsp;&nbsp;',$val['flag'])?>
                             <?php echo $val['type_name']?></option>
@@ -45,7 +46,7 @@ use yii\widgets\ActiveForm;
                 <label>分类图标：</label>
             </div>
             <div class="field">
-                <input type="file" name="type_img"/>
+                <input type="file" name="type_img[]"/>
                 <div class="tips"></div>
             </div>
         </div>
