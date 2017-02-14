@@ -52,11 +52,6 @@
     <li><a href="<?=Url::toRoute(['book/book'])?>" target="right"><span class="icon-caret-right"></span>留言管理</a></li>
     <li><a href="<?=Url::toRoute(['column/column'])?>" target="right"><span class="icon-caret-right"></span>栏目管理</a></li>
   </ul>
-   <h2><span class="icon-pencil-square-o"></span>分类管理</h2>
-  <ul>
-    <li><a href="<?=Url::toRoute(['cate/addcate'])?>" target="right"><span class="icon-caret-right"></span>分类添加</a></li>
-    <li><a href="<?=Url::toRoute(['cate/cate'])?>" target="right"><span class="icon-caret-right"></span>分类列表</a></li>
-  </ul>
    <h2><span class="icon-check-square-o"></span>课程管理</h2>
     <ul>
         <li><a href="<?=Url::toRoute(['column/addcur'])?>" target="right"><span class="icon-caret-right"></span>添加课程</a></li>
@@ -68,12 +63,6 @@
     <li><a href="<?=Url::toRoute(['teacher/show'])?>" target="right"><span class="icon-caret-right"></span>直播列表</a></li>
     <li><a href="<?=Url::toRoute(['teacher/teacher_add_html'])?>" target="right"><span class="icon-caret-right"></span>添加教师</a></li>
     <li><a href="<?=Url::toRoute(['teacher/teacher_list'])?>" target="right"><span class="icon-caret-right"></span>教师列表</a></li>
-  </ul>
-  <h2><span class="icon-pencil-square-o"></span>栏目管理</h2>
-  <ul>
-    <li><a href="<?=Url::toRoute(['content/contentlist'])?>" target="right"><span class="icon-caret-right"></span>内容管理</a></li>
-    <li><a href="<?=Url::toRoute(['content/contentadd'])?>" target="right"><span class="icon-caret-right"></span>添加内容</a></li>
-    <li><a href="<?=Url::toRoute(['cate/cate'])?>" target="right"><span class="icon-caret-right"></span>分类管理</a></li>
   </ul>
     <h2><span class="icon-pencil-square-o"></span>权限管理</h2>
     <ul>
