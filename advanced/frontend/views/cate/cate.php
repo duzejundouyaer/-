@@ -25,8 +25,9 @@
     <tr>
       <th width="5%">ID</th>
       <th width="15%">名称</th>
+      <th width="15%">图标</th>
       <th width="10%">是否显示</th>
-      <th width="10%">操作</th>
+      <th width="15%">操作</th>
     </tr>
       <?php foreach($data as $key=>$val){ ?>
     <tr class="tr_d" parent_id="<?php echo $val['parent_id']?>" node_id="<?php echo $val['type_id']?>" <?php if($val['parent_id']!=0){?> style="display:none" <?php }?> >
@@ -36,6 +37,7 @@
           <a href="javascript:void(0)" onclick="displayData(this);" alt="打开">[+]</a>
           <?php echo $val['type_name']?>
       </td>
+        <td><img src="<?php echo $val['type_img']?>" width="50" alt=""/></td>
       <td ids="<?php echo $val['type_id']?>">
           <?php if($val['type_is_show']==1){?>
               <span class="is_show" style="cursor:pointer">显示</span>
@@ -60,7 +62,7 @@
 <script type="text/javascript">
 function del(id,obj){
     var _this=$(obj);
-  if(confirm("您确定要删除吗?")){
+	if(confirm("您确定要删除吗?")){
         $.ajax({
             type: "POST",
             url: "?r=cate/detele",
@@ -75,7 +77,7 @@ function del(id,obj){
                 }
             }
         });
-  }
+	}
 }
     $(document).ready(function(){
         $(".is_show").click(function(){

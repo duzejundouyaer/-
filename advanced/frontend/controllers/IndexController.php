@@ -19,4 +19,5 @@ class IndexController extends CommonController
     {
     	return $this->render('info');
     }
+    //
 }
