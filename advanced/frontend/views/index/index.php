@@ -20,8 +20,29 @@
   </div>
   <div class="head-l"><a class="button button-little bg-green" href="" target="_blank"><span class="icon-home"></span> 前台首页</a> &nbsp;&nbsp;<a href="##" class="button button-little bg-blue"><span class="icon-wrench"></span> 清除缓存</a> &nbsp;&nbsp;<a class="button button-little bg-red" href="<?=Url::toRoute(['login/login_out'])?>"><span class="icon-power-off"></span> 退出登录</a> </div>
 </div>
+
 <div class="leftnav">
   <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>
+
+    <?php
+    $session = \Yii::$app->session;
+    //取出存入的session值
+    $powers = $session->get('power');
+    $powe=unserialize($powers);
+    foreach ($powe as $key=>$val):?>
+            <?php if($val['pid']==0){ ?>
+                <h2><span class="icon-check-square-o"></span><?php echo $val['power_name'] ?></h2>
+            <?php } ?>
+                <ul style="display:none">
+                    <?php
+                    if(!empty($val['children'])){
+                        foreach($val['children'] as $k=>$v){ ?>
+                            <li><a href="?r=<?php echo $v['controller']?>/<?php echo $v['action']?>" target="right"><span class="icon-caret-right"></span><?php echo $v['power_name']  ?></a></li>
+                        <?php }?>
+                    <?php }?>
+                </ul>
+    <?php endforeach;?>
+
   <h2><span class="icon-user"></span>基本设置</h2>
   <ul style="display:none">
     <li><a href="<?=Url::toRoute(['index/info'])?>" target="right"><span class="icon-caret-right"></span>网站设置</a></li>
@@ -54,7 +75,14 @@
     <li><a href="<?=Url::toRoute(['content/contentadd'])?>" target="right"><span class="icon-caret-right"></span>添加内容</a></li>
     <li><a href="<?=Url::toRoute(['cate/cate'])?>" target="right"><span class="icon-caret-right"></span>分类管理</a></li>
   </ul>
+    <h2><span class="icon-pencil-square-o"></span>权限管理</h2>
+    <ul>
+        <li><a href="<?=Url::toRoute(['diction/administrators'])?>" target="right"><span class="icon-caret-right"></span>管理员列表</a></li>
+        <li><a href="<?=Url::toRoute(['diction/role'])?>" target="right"><span class="icon-caret-right"></span>角色列表</a></li>
+        <li><a href="<?=Url::toRoute(['diction/power'])?>" target="right"><span class="icon-caret-right"></span>节点列表</a></li>
+    </ul>
 </div>
+
 <script type="text/javascript">
 $(function(){
   $(".leftnav h2").click(function(){
