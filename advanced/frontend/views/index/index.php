@@ -42,22 +42,6 @@
                     <?php }?>
                 </ul>
     <?php endforeach;?>
-
-  <h2><span class="icon-user"></span>基本设置</h2>
-  <ul style="display:none">
-    <li><a href="<?=Url::toRoute(['index/info'])?>" target="right"><span class="icon-caret-right"></span>网站设置</a></li>
-    <li><a href="<?=Url::toRoute(['admin/pass'])?>" target="right"><span class="icon-caret-right"></span>修改密码</a></li>
-    <li><a href="<?=Url::toRoute(['page/page'])?>" target="right"><span class="icon-caret-right"></span>单页管理</a></li>
-    <li><a href="<?=Url::toRoute(['adv/adv'])?>" target="right"><span class="icon-caret-right"></span>首页轮播</a></li>
-    <li><a href="<?=Url::toRoute(['book/book'])?>" target="right"><span class="icon-caret-right"></span>留言管理</a></li>
-    <li><a href="<?=Url::toRoute(['column/column'])?>" target="right"><span class="icon-caret-right"></span>栏目管理</a></li>
-  </ul>
-   <h2><span class="icon-check-square-o"></span>课程管理</h2>
-    <ul>
-        <li><a href="<?=Url::toRoute(['column/addcur'])?>" target="right"><span class="icon-caret-right"></span>添加课程</a></li>
-        <li><a href="<?=Url::toRoute(['column/lo'])?>" target="right"><span class="icon-caret-right"></span>添加资源</a></li>
-        <li><a href="<?=Url::toRoute(['column/show'])?>" target="right"><span class="icon-caret-right"></span>课程列表</a></li>
-    </ul>
 </div>
 
 <script type="text/javascript">
