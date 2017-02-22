@@ -51,7 +51,15 @@
           <div class="tips"></div>
         </div>
       </div> 
-    
+         <div class="form-group">
+        <div class="label">
+          <label>直播地址：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" name="address" value="" data-validate="required:请输入直播地址" />
+          <div class="tips"></div>
+        </div>
+      </div> 
       <div class="form-group">
         <div class="label">
           <label>教师简介：</label>

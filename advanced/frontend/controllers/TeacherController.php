@@ -191,6 +191,7 @@ public $layout = false;
     		$names = $post['name'];
     		$desc = $post['desc'];
     		$years = $post['years'];
+            $address = $post['address'];
     		$dir = 'upload/';                //上传目录
     		$name = $dir.$file->name; //上传文件后的绝对路径
     		$status = $file->saveAs($name,true);
@@ -200,7 +201,7 @@ public $layout = false;
                 $filename = $file->name;
                 //$reg = $StudyAdv->addAdv($title,$url,$filename,$desc,$sort);
                  $db = \Yii::$app->db->createCommand();
-                 $reg = $db->insert('study_teacher' , ['teacher_name'=>$names,'teacher_years'=>$years,'teacher_img'=>$filename,'teacher_desc'=>$desc])->execute();//执行添加操作
+                 $reg = $db->insert('study_teacher' , ['teacher_name'=>$names,'teacher_years'=>$years,'teacher_img'=>$filename,'teacher_desc'=>$desc,'teacher_address'=>$address])->execute();//执行添加操作
         			// $StudyAdv->adv_title=$title;
 				    // $StudyAdv->adv_url=$url;
 				    // $StudyAdv->adv_img=$filename;

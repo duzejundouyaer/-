@@ -27,7 +27,8 @@ use yii\widgets\ActiveForm;
     <tr>
       <th>讲师名称</th>  
       <th>个人头像</th>
-      <th>任职时长</th>  
+      <th>任职时长</th>
+      <th>直播地址</th>
       <th>讲师简介</th>  
       <th width="250">操作</th>
     </tr>
@@ -36,6 +37,7 @@ use yii\widgets\ActiveForm;
       <td><?php echo $value['teacher_name']?></td> 
       <td><a href="#"><img src="upload/<?php echo $value['teacher_img']?>" width='100' height='50'  alt=""></a></td>  
       <td><?php echo $value['teacher_years']?></td>  
+      <td><?php echo $value['teacher_address']?></td>
       <td style="width:40%;"><?php echo $value['teacher_desc']?></td>
       <td>
       <div class="button-group" id="<?php echo $value['teacher_id']?>">
