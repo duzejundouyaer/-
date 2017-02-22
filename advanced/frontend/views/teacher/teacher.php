@@ -32,7 +32,52 @@
           <input type="text" class="input w50" name="title" value="" data-validate="required:请输入名称" />         
           <div class="tips"></div>
         </div>
-      </div> 
+      </div>
+ 
+         <div class="form-group">
+            <div class="label">
+                <label>上级分类：</label>
+            </div>
+            <div class="field">
+                <select name="type_id" class="input w50">
+                    <option value="0">顶级节点</option>
+                    <?php foreach($type as $key=>$val){?>
+                        <option value="<?php echo $val['type_id']?>">
+                          <?php echo str_repeat('&nbsp;&nbsp;&nbsp;',$val['flag'])?><?php echo $val['type_name']?>
+                        </option>
+                    <?php }?>
+                </select>
+                <div class="tips">默认一级分类</div>
+            </div>
+        </div>
+
+<div class="form-group">
+            <div class="label">
+                <label>老师：</label>
+            </div>
+            <div class="field">
+                <select name="teacher_id" class="input w50">
+                
+                    <?php foreach($laoshi as $key=>$val){?>
+                        <option value="<?php echo $val['teacher_id']?>">
+                          <?php echo $val['teacher_name']?>
+                      </option>
+                    <?php }?>
+                </select>
+                <div class="tips"></div>
+            </div>
+        </div>
+
+<div class="form-group">
+        <div class="label">
+          <label>直播地址：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" name="url" value="" data-validate="required:请输入直播地址" />         
+          <div class="tips"></div>
+        </div>
+      </div>
+
       <div class="form-group">
         <div class="label">
           <label>封面：</label>
