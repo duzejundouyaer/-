@@ -1,7 +1,9 @@
 <?php
 namespace frontend\controllers;
 
+
 use Yii;
+use yii\db\Query;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
@@ -16,6 +18,8 @@ use yii\web\UploadedFile;
 use yii\data\Pagination;
 use app\models\teacher;
 use app\models\StudyTeacher;
+use frontend\models\Type;
+
 
 /**
  * 名师点播
@@ -26,14 +30,32 @@ class TeacherController extends CommonController
 
 public $enableCsrfValidation = false; //禁止表单提交验证
 public $layout = false;
+   
+
+    public function recursion($data,$path=0,$flag=1){
+        static $arr=array();
+        foreach($data as $key=>$val){
+            if($val['parent_id']==$path){
+                $val['flag']=$flag;
+                $arr[]=$val;
+                $this->recursion($data,$val['type_id'],$flag+1);
+            }
+        }
+        return $arr;
+    }
 
 /**
  *跳转添加页面
- * 
+ *    
  */
 	public function actionYe(){
+                         $query = new Query();
+                      $res = $query->select('teacher_id,teacher_name')->from('study_teacher')->all();
 
-		return $this->render('teacher');
+                        $type=new Type();
+                         $info=$type::find()->asArray()->all();
+                         $data=$this->recursion($info);
+	 	return $this->render('teacher',['type'=>$data,'laoshi'=>$res]);
 	}
 
 
@@ -66,10 +88,12 @@ public $layout = false;
     		$add= yii::$app->request;
     		$res=$add->post();
     		$title=$res['title'];
-    		$begintime=$res['begintime'];
-    		$endtime=$res['endtime'];
+    		$begintime=strtotime($res['begintime']);
+    		$endtime=strtotime($res['endtime']);
     		$course=$res['course'];
-
+                         $type_id=$res['type_id'];
+                         $teacher_id=$res['teacher_id'];
+                         $url = $res['url'];
     		$test= new teacher();
     		//print_r($test);die;
         			$test->title     =       $title;
@@ -77,6 +101,9 @@ public $layout = false;
         			$test->begintime =   $begintime;
         			$test->endtime   =     $endtime;
         			$test->course    =      $course;
+                                       $test->type_id = $type_id;
+                                       $test->teacher_id=$teacher_id;
+                                       $test->url=$url;
         			$res  =  $test->save();
         			if($res){
 
