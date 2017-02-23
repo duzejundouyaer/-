@@ -94,7 +94,7 @@ public $layout = false;
                          $type_id=$res['type_id'];
                          $teacher_id=$res['teacher_id'];
                          $url = $res['url'];
-    		$test= new teacher();
+    		$test= new Teacher();
     		//print_r($test);die;
         			$test->title     =       $title;
         			$test->photo     =        $photo;
